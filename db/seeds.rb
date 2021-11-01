@@ -7,17 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
  # ユーザーデータを作成
  # 管理者ユーザー
- User.create!(
-    email: "admin@admin.com",
-    password: "password",
-    password_confirmation: "password",
-    role: 1
-  )
+#  User.create!(
+#     email: "admin@admin.com",
+#     password: "password",
+#     password_confirmation: "password",
+#     role: 1
+#   )
  
-  # 一般ユーザー
-  User.create!(
-    email: "general@general.com",
-    password: "password",
-    password_confirmation: "password",
-    role: 0
+#   # 一般ユーザー
+#   User.create!(
+#     email: "general@general.com",
+#     password: "password",
+#     password_confirmation: "password",
+#     role: 0
+#   )
+
+5.times do |n|
+Post.create!(
+  user_id: 2,
+  title: "本日のおすすめ#{n + 1}",
+  content: "ディナー#{n + 1}"
   )
+end

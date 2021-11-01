@@ -5,11 +5,11 @@ class PostPolicy < ApplicationPolicy
   
     def show?
       # ユーザー詳細は管理ユーザーのみ許可
-      user.admin?
+      user.general?
     end
   
     def create?
-      true
+      user.general? 
     end
   
     def new?
@@ -25,7 +25,7 @@ class PostPolicy < ApplicationPolicy
     end
   
     def destroy?
-      # ユーザー詳細は管理ユーザーのみ許可
-      user.admin?
+      # ユーザー許可した設定の人のみ消せる
+      user.general? || user.admin?
     end
   end

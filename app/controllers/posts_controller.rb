@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   def index
-    if current_user.admin?
-      @posts = Post.all
-    else
-      @posts = current_user.posts
-    end
+    @posts = if current_user.admin?
+               Post.all
+             else
+               current_user.posts
+             end
   end
 
   def new
@@ -13,7 +13,6 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-
   end
 
   def show
@@ -29,13 +28,19 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to posts_path
+  end
+
   def destroy
     @post = Post.find(params[:id])
-     # punditにてauthorizeメソッドにリソースオブジェクトを渡して認可状況を確認。
+    # punditにてauthorizeメソッドにリソースオブジェクトを渡して認可状況を確認。
     authorize @post
 
     if @post.destroy
-    redirect_to posts_path
+      redirect_to posts_path
     else
       render :index
     end

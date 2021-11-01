@@ -15,7 +15,9 @@
     <tr>
     <td><%= post.title %></td>
     <td><%= post.content %></td>
-    <td><%= link_to "削除", post_path(id: post.id), method: :delete , data: {confirm: "削除しますか？"}%></td>
+    <td><%= link_to "編集", edit_post_path(id: post.id) %>
+        <%= link_to "削除", post_path(id: post.id), method: :delete , data: {confirm: "削除しますか？"}%></td>
+
     </tr>
 <% end %>
 </tbody>

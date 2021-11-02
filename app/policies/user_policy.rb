@@ -8,7 +8,7 @@ class UserPolicy < ApplicationPolicy
 
   def show?
     # ユーザー詳細は管理ユーザーのみ許可
-    user.admin?
+    user.admin? || user.general?
   end
 
   def create?

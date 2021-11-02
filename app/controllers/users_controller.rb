@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   def index
-    # Userの一覧を表示
-    @users = User.all
+    @users = if current_user.admin?
+               User.all
+             else
+               redirect_to user_path(current_user.id)
+               @user = current_user
+               authorize @user
+             end
   end
 
   def show

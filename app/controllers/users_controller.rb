@@ -17,4 +17,17 @@ class UsersController < ApplicationController
     # punditにてauthorizeメソッドにリソースオブジェクトを渡して認可状況を確認。
     authorize @user
   end
+
+  def edit
+    @user = User.find(params[:id])
+    authorize @user
+  end
+
+  def update
+
+  end
+
+  def destroy
+
+  end
 end

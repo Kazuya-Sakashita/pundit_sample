@@ -4,3 +4,36 @@
 <p><%= @user.role %></p>
 
 <%= link_to 'Back', users_path %>
+
+
+<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
+    <h4> メールアドレス： <%= current_user.email %> </h4>
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<% end %>
+
+<br>
+
+<li><%= link_to "基本情報", edit_user_path %></li>
+<hr>
+<div>
+    <h2>登録情報</h2>
+    <table>
+    <tbody>
+        <tr>
+        <th>メールアドレス:</th> <td> <%= @user.email %></td>
+        </tr>
+        <tr>
+        <th>氏名:</th>          <td><%= @user.name %></td>
+        </tr>        <tr>
+        <th>電話番号:</th>       <td><%= @user.phone %></td>
+        </tr>        <tr>
+        <th>単価:</th>       <td><%= @user.wage.unit_price %></td>
+        </tr>     <tr>
+        <th>単位:</th>       <td><%= @user.wage.unit %></td>
+        </tr>       
+
+        </table>
+        </tbody>
+
+
+</div>

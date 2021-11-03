@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_101748) do
+ActiveRecord::Schema.define(version: 2021_11_03_061027) do
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 0
@@ -21,8 +29,20 @@ ActiveRecord::Schema.define(version: 2021_11_01_101748) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "unit_price", default: "0", null: false
+    t.integer "unit", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_wages_on_user_id"
+  end
+
+  add_foreign_key "wages", "users"
 end

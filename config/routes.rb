@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'homes#index'
   resources :users
   resources :posts
+  resources :wages
   resources :homes, only: %i[index]
 
 end

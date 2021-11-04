@@ -40,6 +40,10 @@ class WagesController < ApplicationController
 
   def new
     @wage = Wage.new
+    @wage_user = Wage.select(:user_id).pluck(:user_id)
+    @user_list = User.where.not(role:1).select(:id).pluck(:id)
+    @unregistered_users_id = @user_list - @wage_user
+    @unregistered_users = User.where(id: @unregistered_users_id)
   end
 
   def create

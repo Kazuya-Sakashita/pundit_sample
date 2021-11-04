@@ -3,6 +3,7 @@ class WagesController < ApplicationController
     if @user = current_user.admin?
       # adminは全ユーザーを表示
       @wages = Wage.all
+      @users = User.all
     else
       # generalは、自分のを表示
       redirect_to wages_show_path
@@ -39,6 +40,10 @@ class WagesController < ApplicationController
 
   def new
     @wage = Wage.new
+    @wage_user = Wage.select(:user_id).pluck(:user_id)
+    @user_list = User.where.not(role:1).select(:id).pluck(:id)
+    @unregistered_users_id = @user_list - @wage_user
+    @unregistered_users = User.where(id: @unregistered_users_id)
   end
 
   def create

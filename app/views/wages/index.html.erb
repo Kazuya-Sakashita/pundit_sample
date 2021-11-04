@@ -18,6 +18,8 @@
     <td><%= wage.user.email %></td>
     <td><%= wage.unit_price %></td>
     <td><%= wage.unit %></td>
+    <td> <%= link_to "編集", edit_wage_path(id: wage.id) %>
+         <%= link_to "削除",  wage_path(id: wage.id), method: :delete , data: {confirm: "削除しますか？"}%></td>
 
     </tr>
 <% end %>

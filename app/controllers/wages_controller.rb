@@ -3,6 +3,7 @@ class WagesController < ApplicationController
     if @user = current_user.admin?
       # adminは全ユーザーを表示
       @wages = Wage.all
+      @users = User.all
     else
       # generalは、自分のを表示
       redirect_to wages_show_path
